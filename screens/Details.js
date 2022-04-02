@@ -47,6 +47,11 @@ const Details = ({ route, navigation }) => {
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: SIZES.extraLarge * 3 }}
+        ListHeaderComponent={() => (
+          <React.Fragment>
+            <DetailsHeader />
+          </React.Fragment>
+        )}
       />
     </SafeAreaView>
   );
