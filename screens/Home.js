@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 
 import { COLORS, NFTData } from "../constants";
@@ -18,6 +18,9 @@ const Home = () => {
     }
   };
 
+  const renderItem = useCallback(({ item }) => <NFTCard data={item} />, []);
+  const keyExtractor = useCallback((item) => item.id, []);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FocusedStatusBar background={COLORS.primary} />
@@ -25,13 +28,12 @@ const Home = () => {
         <View style={{ zIndex: 0 }}>
           <FlatList
             data={nftData}
-            renderItem={({ item }) => <NFTCard data={item} />}
-            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
           />
         </View>
-
         <View
           style={{
             position: "absolute",
@@ -42,7 +44,14 @@ const Home = () => {
             zIndex: -1,
           }}
         >
-          <View style={{ height: 300, backgroundColor: COLORS.primary }} />
+          <View
+            style={{
+              height: 300,
+              backgroundColor: COLORS.primary,
+              borderBottomLeftRadius: 22,
+              borderBottomRightRadius: 22,
+            }}
+          />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
       </View>
