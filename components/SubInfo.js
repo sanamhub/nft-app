@@ -86,6 +86,7 @@ export const EndDate = () => {
         backgroundColor: COLORS.white,
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: 17,
         ...SHADOWS.light,
         elevation: 1,
         maxWidth: "50%",
